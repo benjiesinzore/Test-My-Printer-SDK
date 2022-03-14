@@ -54,23 +54,31 @@ public class MainActivity extends AppCompatActivity {
         public Print_Thread() {}
 
         public void run() {
-            int ret = posApiHelper.PrintInit(2, 24, 24, 0x33);
-            if(ret!=0){
-                return;
+            try {
+                int ret = posApiHelper.PrintInit(2, 24, 24, 0x33);
+                posApiHelper.PrintSetVoltage(75);
+                posApiHelper.PrintSetGray (2);
+                posApiHelper.PrintSetFont((byte)16, (byte)16, (byte)0x33);
+
+                Log.d("Init", "" + ret);
+                if (ret != 0) {
+                    return;
+                }
+                posApiHelper.PrintStr("Print Tile\n");
+                posApiHelper.PrintStr("- - - - - - - - - - - - - - - - - - - - - - - -\n");
+                posApiHelper.PrintStr(" Print Str2 \n");
+                posApiHelper.PrintBarcode("123456789", 360, 120, BarcodeFormat.CODE_128);
+                posApiHelper.PrintBarcode("123456789", 240, 240, BarcodeFormat.QR_CODE);
+                posApiHelper.PrintStr("CODE_128 : " + "123456789" + "\n\n");
+                posApiHelper.PrintStr("QR_CODE : " + "123456789" + "\n\n");
+                posApiHelper.PrintStr(" \n");
+                Log.d("Init 2", "" + ret);
+                int start = posApiHelper.PrintStart();
+                Log.d("Printer Start", "" + start);
             }
-            posApiHelper.PrintStr("Print Tile\n");
-            if(ret!=0){
-                return;
+            catch (Exception e){
+                Log.d("Exception", e.toString());
             }
-            posApiHelper.PrintStr("- - - - - - - - - - - - - - - - - - - - - - - -\n");
-            posApiHelper.PrintStr(" Print Str2 \n");
-            posApiHelper.PrintBarcode("123456789", 360, 120, BarcodeFormat.CODE_128);
-            posApiHelper.PrintBarcode("123456789", 240, 240, BarcodeFormat.QR_CODE);
-            posApiHelper.PrintStr("CODE_128 : " + "123456789" + "\n\n");
-            posApiHelper.PrintStr("QR_CODE : " + "123456789" + "\n\n");
-            posApiHelper.PrintStr(" \n");
-            int start = posApiHelper.PrintStart();
-            Log.d("Printer Start", "" +start);
         }
     }
 }
