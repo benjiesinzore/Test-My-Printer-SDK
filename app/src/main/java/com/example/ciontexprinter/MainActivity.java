@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -64,14 +66,55 @@ public class MainActivity extends AppCompatActivity {
                 if (ret != 0) {
                     return;
                 }
-                posApiHelper.PrintStr("Print Tile\n");
-                posApiHelper.PrintStr("- - - - - - - - - - - - - - - - - - - - - - - -\n");
-                posApiHelper.PrintStr(" Print Str2 \n");
-                posApiHelper.PrintBarcode("123456789", 360, 120, BarcodeFormat.CODE_128);
-                posApiHelper.PrintBarcode("123456789", 240, 240, BarcodeFormat.QR_CODE);
-                posApiHelper.PrintStr("CODE_128 : " + "123456789" + "\n\n");
-                posApiHelper.PrintStr("QR_CODE : " + "123456789" + "\n\n");
-                posApiHelper.PrintStr(" \n");
+
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                Bitmap bmp1 = BitmapFactory.decodeResource(MainActivity.this.getResources(), R.mipmap.ic_print_foreground);
+                ret = posApiHelper.PrintBmp(bmp1);
+
+                //posApiHelper.PrintStr("                                         \n");
+                if (ret == 0) {
+//                    posApiHelper.PrintStr("\n\n\n");
+//                    posApiHelper.PrintStr("                                         \n");
+//                    posApiHelper.PrintStr("                                         \n");
+
+                    //SendMsg("Printing... ");
+                    //ret = posApiHelper.PrintStart();
+
+                    //msg1.what = ENABLE_RG;
+                    //handler.sendMessage(msg1);
+
+//                    Log.d("", "Lib_PrnStart ret = " + ret);
+//                    if (ret != 0) {
+//                        RESULT_CODE = -1;
+//                        Log.e("liuhao", "Lib_PrnStart fail, ret = " + ret);
+//                        if (ret == -1) {
+//                            SendMsg("No Print Paper ");
+//                        } else if(ret == -2) {
+//                            SendMsg("too hot ");
+//                        }else if(ret == -3) {
+//                            SendMsg("low voltage ");
+//                        }else{
+//                            SendMsg("Print fail ");
+//                        }
+//                    } else {
+//                        final long end_PrintBmp = System.currentTimeMillis();
+//                        RESULT_CODE = 0;
+//                        final long PrintTime = start_PrintBmp - end_PrintBmp;
+//                        SendMsg("Print Finish BMP decodetime="+decodetime + "PrintBmpTime"+PrintTime);
+//                    }
+                } else {
+                    //RESULT_CODE = -1;
+                    //SendMsg("Lib_PrnBmp Failed");
+                }
+
+//                posApiHelper.PrintStr("Print Tile\n");
+//                posApiHelper.PrintStr("- - - - - - - - - - - - - - - - - - - - - - - -\n");
+//                posApiHelper.PrintStr(" Print Str2 \n");
+//                posApiHelper.PrintBarcode("123456789", 360, 120, BarcodeFormat.CODE_128);
+//                posApiHelper.PrintBarcode("123456789", 240, 240, BarcodeFormat.QR_CODE);
+//                posApiHelper.PrintStr("CODE_128 : " + "123456789" + "\n\n");
+//                posApiHelper.PrintStr("QR_CODE : " + "123456789" + "\n\n");
+//                posApiHelper.PrintStr(" \n");
                 Log.d("Init 2", "" + ret);
                 int start = posApiHelper.PrintStart();
                 Log.d("Printer Start", "" + start);
