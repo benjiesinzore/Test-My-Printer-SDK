@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -57,19 +58,36 @@ public class MainActivity extends AppCompatActivity {
 
         public void run() {
             try {
-                int ret = posApiHelper.PrintInit(2, 24, 24, 0x33);
-                posApiHelper.PrintSetVoltage(75);
-                posApiHelper.PrintSetGray (2);
+                int ret = posApiHelper.PrintInit(0, 24, 24, 0x33);
+                posApiHelper.PrintSetVoltage(10);
+                posApiHelper.PrintSetGray (0);
                 posApiHelper.PrintSetFont((byte)16, (byte)16, (byte)0x33);
+
 
                 Log.d("Init", "" + ret);
                 if (ret != 0) {
                     return;
                 }
 
-                BitmapFactory.Options options = new BitmapFactory.Options();
-                Bitmap bmp1 = BitmapFactory.decodeResource(MainActivity.this.getResources(), R.mipmap.ic_print_foreground);
+
+                Bitmap bmp1 = BitmapFactory.decodeResource(MainActivity.this.getResources(), R.mipmap.bit1);//logocropped);
+
+                Log.d("BitMap", String.valueOf(bmp1));
                 ret = posApiHelper.PrintBmp(bmp1);
+                posApiHelper.PrintStr("Hello\n" +
+                        "\n" +
+                        "\n" +
+                        "Benjamin\n");
+
+                posApiHelper.PrintStr("Hello\n" +
+                        "\n" +
+                        "\n" +
+                        "\n");
+
+                posApiHelper.PrintStr("\n" +
+                        "\n" +
+                        "\n" +
+                        "\n");
 
                 //posApiHelper.PrintStr("                                         \n");
                 if (ret == 0) {
@@ -77,44 +95,13 @@ public class MainActivity extends AppCompatActivity {
 //                    posApiHelper.PrintStr("                                         \n");
 //                    posApiHelper.PrintStr("                                         \n");
 
-                    //SendMsg("Printing... ");
-                    //ret = posApiHelper.PrintStart();
 
-                    //msg1.what = ENABLE_RG;
-                    //handler.sendMessage(msg1);
-
-//                    Log.d("", "Lib_PrnStart ret = " + ret);
-//                    if (ret != 0) {
-//                        RESULT_CODE = -1;
-//                        Log.e("liuhao", "Lib_PrnStart fail, ret = " + ret);
-//                        if (ret == -1) {
-//                            SendMsg("No Print Paper ");
-//                        } else if(ret == -2) {
-//                            SendMsg("too hot ");
-//                        }else if(ret == -3) {
-//                            SendMsg("low voltage ");
-//                        }else{
-//                            SendMsg("Print fail ");
-//                        }
-//                    } else {
-//                        final long end_PrintBmp = System.currentTimeMillis();
-//                        RESULT_CODE = 0;
-//                        final long PrintTime = start_PrintBmp - end_PrintBmp;
-//                        SendMsg("Print Finish BMP decodetime="+decodetime + "PrintBmpTime"+PrintTime);
 //                    }
                 } else {
-                    //RESULT_CODE = -1;
-                    //SendMsg("Lib_PrnBmp Failed");
+                    //
                 }
 
-//                posApiHelper.PrintStr("Print Tile\n");
-//                posApiHelper.PrintStr("- - - - - - - - - - - - - - - - - - - - - - - -\n");
-//                posApiHelper.PrintStr(" Print Str2 \n");
-//                posApiHelper.PrintBarcode("123456789", 360, 120, BarcodeFormat.CODE_128);
-//                posApiHelper.PrintBarcode("123456789", 240, 240, BarcodeFormat.QR_CODE);
-//                posApiHelper.PrintStr("CODE_128 : " + "123456789" + "\n\n");
-//                posApiHelper.PrintStr("QR_CODE : " + "123456789" + "\n\n");
-//                posApiHelper.PrintStr(" \n");
+
                 Log.d("Init 2", "" + ret);
                 int start = posApiHelper.PrintStart();
                 Log.d("Printer Start", "" + start);
