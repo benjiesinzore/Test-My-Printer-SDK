@@ -70,19 +70,14 @@ public class MainActivity extends AppCompatActivity {
                 }
 
 
-                Bitmap bmp1 = BitmapFactory.decodeResource(MainActivity.this.getResources(), R.mipmap.bit1);//logocropped);
+                Bitmap bmp1 = BitmapFactory.decodeResource(MainActivity.this.getResources(), R.mipmap.this2);//logocropped);
 
                 Log.d("BitMap", String.valueOf(bmp1));
                 ret = posApiHelper.PrintBmp(bmp1);
                 posApiHelper.PrintStr("Hello\n" +
                         "\n" +
                         "\n" +
-                        "Benjamin\n");
-
-                posApiHelper.PrintStr("Hello\n" +
-                        "\n" +
-                        "\n" +
-                        "\n");
+                        " \n");
 
                 posApiHelper.PrintStr("\n" +
                         "\n" +
